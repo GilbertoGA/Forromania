@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111111">
+  <meta name="description" content="Explora accesorios para tu próxima ruta con FORROMANIA.">
+  <title>FORROMANIA — Equipamiento para salir</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="announcement">
+        <span class="announcement-dot"></span>
+        EQUÍPATE PARA LO QUE VIENE
+        <span class="announcement-sep">/</span>
+        ACCESORIOS QUE SIGUEN TU RITMO
+    </div>
+
+    <header class="site-header">
+        <a class="brand" href="#inicio" aria-label="FORROMANIA, inicio">
+            <span class="brand-mark">F<span>↗</span></span>
+            <span class="brand-name">FORRO<span>MANIA</span><small>RIDE YOUR WAY</small></span>
+        </a>
+
+        <nav class="main-nav" aria-label="Navegación principal">
+            <button class="nav-link active" data-view="home">Inicio</button>
+            <button class="nav-link" data-view="catalog">Catálogo</button>
+        </nav>
+
+        <button class="cart-nav" data-view="cart">
+            <span class="bag-icon">▱</span>
+            <span>Carrito</span>
+            <span class="cart-count" id="cart-count">0</span>
+        </button>
+    </header>
+
+    <main id="app" aria-live="polite"></main>
+
+    <footer class="site-footer">
+        <a class="footer-brand" href="#inicio">FORROMANIA<span>®</span></a>
+        <span>HECHO PARA SALIR A RODAR.</span>
+        <span>PROTOTIPO ACADÉMICO · 2026</span>
+    </footer>
+
+    <div class="toast" id="toast" role="status"></div>
+</body>
+</html>
