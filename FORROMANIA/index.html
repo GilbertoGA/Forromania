@@ -28,14 +28,14 @@
             <button class="nav-link" data-view="catalog">Catálogo</button>
         </nav>
 
-        <button class="cart-nav" data-view="cart">
-            <span class="bag-icon">▱</span>
+        <button class="cart-nav" data-view="cart" aria-label="Carrito, 0 productos">
+            <span class="bag-icon" aria-hidden="true">▱</span>
             <span>Carrito</span>
             <span class="cart-count" id="cart-count">0</span>
         </button>
     </header>
 
-    <main id="app" aria-live="polite"></main>
+    <main id="app"></main>
 
     <footer class="site-footer">
         <a class="footer-brand" href="#inicio">FORROMANIA<span>®</span></a>
@@ -43,6 +43,6 @@
         <span>PROTOTIPO ACADÉMICO · 2026</span>
     </footer>
 
-    <div class="toast" id="toast" role="status"></div>
+    <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 </body>
 </html>

@@ -4,7 +4,9 @@
     --paper: #f4f2ed;
     --white: #fff;
     --orange: #f05a28;
-    --muted: #77766f;
+    --orange-text: #9f3212;
+    --orange-hover: #c84118;
+    --muted: #5f5c55;
     --line: #dedbd3;
     --display: 'Bahnschrift SemiCondensed', 'Arial Narrow', Arial, sans-serif;
     --body: 'DM Sans', Arial, sans-serif;
@@ -28,7 +30,7 @@ body {
     background: var(--paper);
     color: var(--ink);
     font-family: var(--body);
-    font-size: 14px;
+    font-size: 16px;
 }
 
 button, input, textarea {
@@ -39,17 +41,22 @@ button {
     cursor: pointer;
 }
 
+:focus-visible {
+    outline: 3px solid var(--ink);
+    outline-offset: 3px;
+}
+
 
 /* HEADER */
 .announcement {
-    height: 29px;
+    min-height: 36px;
     background: var(--orange);
-    color: white;
+    color: var(--ink);
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    font-size: 9px;
+    font-size: 12px;
     letter-spacing: .17em;
     font-weight: 500;
 }
@@ -92,14 +99,14 @@ button {
     display: grid;
     place-content: center;
     background: var(--orange);
-    color: white;
+    color: var(--ink);
     font: 500 25px var(--display);
     position: relative;
     transform: skew(-7deg);
 }
 
 .brand-mark span {
-    font-size: 11px;
+    font-size: 14px;
     position: absolute;
     right: 3px;
     top: 1px;
@@ -112,12 +119,12 @@ button {
 }
 
 .brand-name>span {
-    color: var(--orange);
+    color: var(--orange-text);
 }
 
 .brand-name small {
     display: block;
-    font: 500 7px var(--body);
+    font: 500 10px var(--body);
     letter-spacing: .23em;
     margin-top: 5px;
 }
@@ -133,11 +140,13 @@ button {
 
 .nav-link {
     height: 100%;
+    min-width: 44px;
+    min-height: 44px;
     position: relative;
     border: 0;
     background: none;
-    color: #777;
-    font-size: 12px;
+    color: var(--muted);
+    font-size: 16px;
     font-weight: 500;
     padding: 0 2px;
 }
@@ -159,12 +168,12 @@ button {
 .cart-nav {
     border: 1px solid #dad7d0;
     background: transparent;
-    height: 38px;
-    padding: 0 11px;
+    min-height: 44px;
+    padding: 0 12px;
     display: flex;
     gap: 9px;
     align-items: center;
-    font-size: 11px;
+    font-size: 16px;
     font-weight: 500;
 }
 
@@ -179,13 +188,13 @@ button {
 
 .cart-count {
     background: var(--orange);
-    color: #fff;
+    color: var(--ink);
     border-radius: 50%;
-    width: 18px;
-    height: 18px;
+    width: 24px;
+    height: 24px;
     display: grid;
     place-items: center;
-    font-size: 9px;
+    font-size: 14px;
 }
 
 .view {
@@ -221,7 +230,7 @@ button {
 }
 
 .eyebrow {
-    font-size: 9px;
+    font-size: 14px;
     font-weight: 500;
     letter-spacing: .21em;
     text-transform: uppercase;
@@ -250,8 +259,8 @@ button {
 }
 
 .hero-copy p {
-    color: #74716b;
-    font-size: 13px;
+    color: var(--muted);
+    font-size: 16px;
     line-height: 1.8;
     max-width: 355px;
     margin: 0 0 25px;
@@ -262,14 +271,14 @@ button {
 .button {
     border: 0;
     background: var(--orange);
-    color: white;
-    min-height: 46px;
-    padding: 0 22px;
+    color: var(--ink);
+    min-height: 48px;
+    padding: 10px 22px;
     display: inline-flex;
     justify-content: center;
     align-items: center;
     gap: 18px;
-    font-size: 10px;
+    font-size: 16px;
     font-weight: 500;
     letter-spacing: .1em;
     text-transform: uppercase;
@@ -277,13 +286,15 @@ button {
 }
 
 .button:hover {
-    background: #d9491a;
+    background: var(--orange-hover);
+    color: var(--white);
     transform: translateY(-2px);
     box-shadow: 0 7px 18px #f05a283b;
 }
 
 .button-dark {
     background: var(--ink);
+    color: var(--white);
 }
 
 .button-dark:hover {
@@ -298,7 +309,7 @@ button {
 
 .button-outline:hover {
     background: var(--ink);
-    color: #fff;
+    color: var(--white);
 }
 
 .button-arrow {
@@ -312,7 +323,7 @@ button {
     gap: 12px;
     margin-top: 40px;
     color: #68665f;
-    font-size: 9px;
+    font-size: 14px;
     font-weight: 500;
     letter-spacing: .1em;
 }
@@ -347,7 +358,7 @@ button {
     position: absolute;
     right: 18px;
     top: 18px;
-    font-size: 8px;
+    font-size: 10px;
     letter-spacing: .22em;
     writing-mode: vertical-rl;
     color: #e9e5de99;
@@ -405,8 +416,9 @@ button {
     right: 0;
     bottom: 28px;
     background: var(--orange);
+    color: var(--ink);
     padding: 12px 16px;
-    font: 500 12px var(--display);
+    font: 500 14px var(--display);
     letter-spacing: .08em;
     z-index: 1;
     transform: rotate(-2deg);
@@ -428,8 +440,8 @@ button {
 }
 
 .section-kicker {
-    font-size: 9px;
-    color: var(--orange);
+    font-size: 12px;
+    color: var(--orange-text);
     font-weight: 500;
     letter-spacing: .19em;
 }
@@ -443,12 +455,18 @@ button {
 
 .text-link {
     color: var(--ink);
+    border: 0;
+    border-bottom: 1px solid var(--orange);
+    background: transparent;
     text-decoration: none;
-    font-size: 10px;
+    font-size: 16px;
     font-weight: 500;
     letter-spacing: .08em;
-    border-bottom: 1px solid var(--orange);
-    padding-bottom: 5px;
+    min-height: 44px;
+    padding: 8px 0;
+    display: inline-flex;
+    align-items: center;
+    text-align: left;
 }
 
 
@@ -506,8 +524,8 @@ button {
     top: 12px;
     padding: 6px 8px;
     background: var(--orange);
-    color: #fff;
-    font-size: 8px;
+    color: var(--ink);
+    font-size: 14px;
     font-weight: 500;
     letter-spacing: .12em;
     z-index: 1;
@@ -518,9 +536,9 @@ button {
 }
 
 .product-type {
-    font-size: 8px;
+    font-size: 14px;
     letter-spacing: .16em;
-    color: #858179;
+    color: var(--muted);
     font-weight: 500;
     text-transform: uppercase;
 }
@@ -532,8 +550,8 @@ button {
 }
 
 .product-desc {
-    color: #77736c;
-    font-size: 10px;
+    color: var(--muted);
+    font-size: 14px;
     line-height: 1.5;
     margin: 0;
     min-height: 31px;
@@ -556,20 +574,23 @@ button {
 }
 
 .tiny-btn {
-    height: 31px;
-    padding: 0 9px;
+    min-height: 44px;
+    min-width: 44px;
+    padding: 8px 10px;
     border: 1px solid #d7d3cb;
     background: transparent;
-    font-size: 8px;
+    font-size: 16px;
     font-weight: 500;
     letter-spacing: .06em;
     text-transform: uppercase;
     transition: .2s;
+    line-height: 1.2;
+    white-space: normal;
 }
 
 .tiny-btn:hover {
     border-color: var(--orange);
-    color: var(--orange);
+    color: var(--orange-text);
 }
 
 .tiny-btn.add {
@@ -581,6 +602,7 @@ button {
 .tiny-btn.add:hover {
     background: var(--orange);
     border-color: var(--orange);
+    color: var(--ink);
 }
 
 .catalog-top, .page-wrap {
@@ -604,17 +626,17 @@ button {
 
 .catalog-title-row p {
     color: var(--muted);
-    font-size: 12px;
+    font-size: 14px;
     margin: 10px 0 0;
 }
 
 .search {
     width: 265px;
-    height: 42px;
+    min-height: 48px;
     border: 1px solid var(--line);
     background: #fbfaf7;
     padding: 0 13px;
-    font-size: 11px;
+    font-size: 16px;
     outline: none;
 }
 
@@ -635,17 +657,18 @@ button {
     display: flex;
     gap: 9px;
     align-items: center;
-    font-size: 9px;
+    font-size: 16px;
     letter-spacing: .12em;
     text-transform: uppercase;
-    color: #8b887f;
+    color: var(--muted);
     margin-bottom: 23px;
 }
 
 .breadcrumb button {
     border: 0;
     background: none;
-    padding: 0;
+    min-height: 44px;
+    padding: 8px;
     color: inherit;
     font-size: inherit;
     letter-spacing: inherit;
@@ -653,7 +676,7 @@ button {
 }
 
 .breadcrumb button:hover {
-    color: var(--orange);
+    color: var(--orange-text);
 }
 
 
@@ -685,13 +708,13 @@ button {
     position: absolute;
     bottom: 16px;
     left: 18px;
-    font-size: 8px;
+    font-size: 12px;
     letter-spacing: .2em;
-    color: #777;
+    color: var(--muted);
 }
 
 .detail-copy .product-type {
-    color: var(--orange);
+    color: var(--orange-text);
 }
 
 .detail-copy h1 {
@@ -706,9 +729,9 @@ button {
 }
 
 .detail-copy p {
-    font-size: 12px;
+    font-size: 16px;
     line-height: 1.85;
-    color: #706d66;
+    color: var(--muted);
     max-width: 430px;
 }
 
@@ -717,7 +740,7 @@ button {
     padding: 0;
     margin: 19px 0 24px;
     color: #57544d;
-    font-size: 10px;
+    font-size: 14px;
     line-height: 2.2;
 }
 
@@ -734,7 +757,7 @@ button {
 }
 
 .quantity {
-    height: 46px;
+    min-height: 48px;
     border: 1px solid var(--line);
     display: flex;
     align-items: center;
@@ -742,7 +765,8 @@ button {
 }
 
 .quantity button {
-    width: 36px;
+    width: 44px;
+    min-height: 44px;
     height: 100%;
     border: 0;
     background: none;
@@ -750,9 +774,9 @@ button {
 }
 
 .quantity span {
-    width: 23px;
+    min-width: 32px;
     text-align: center;
-    font-size: 11px;
+    font-size: 16px;
 }
 
 
@@ -793,7 +817,7 @@ button {
 }
 
 .cart-product-type {
-    font-size: 8px;
+    font-size: 14px;
     color: var(--muted);
     letter-spacing: .13em;
     text-transform: uppercase;
@@ -802,32 +826,36 @@ button {
 .cart-controls {
     display: flex;
     align-items: center;
-    gap: 10px;
+    flex-wrap: wrap;
+    gap: 12px;
     margin-top: 9px;
 }
 
 .cart-controls .quantity {
-    height: 29px;
+    min-height: 44px;
 }
 
 .cart-controls .quantity button {
-    width: 27px;
+    width: 44px;
 }
 
 .cart-controls .quantity span {
-    font-size: 10px;
+    font-size: 16px;
 }
 
 .remove-btn {
     border: 0;
     background: none;
-    color: #8a867d;
+    color: var(--orange-text);
     text-decoration: underline;
-    font-size: 9px;
+    font-size: 16px;
+    min-height: 44px;
+    padding: 8px;
+    line-height: 1.2;
 }
 
 .remove-btn:hover {
-    color: var(--orange);
+    color: var(--ink);
 }
 
 .cart-line-price {
@@ -852,13 +880,13 @@ button {
     justify-content: space-between;
     padding: 12px 0;
     border-bottom: 1px solid #e9e6df;
-    color: #757169;
-    font-size: 11px;
+    color: var(--muted);
+    font-size: 16px;
 }
 
 .summary-line.total {
     font-weight: 500;
-    font-size: 14px;
+    font-size: 18px;
     color: var(--ink);
     border: 0;
     padding: 17px 0 20px;
@@ -869,8 +897,8 @@ button {
 }
 
 .summary-note {
-    font-size: 9px;
-    color: #858178;
+    font-size: 14px;
+    color: var(--muted);
     text-align: center;
     line-height: 1.6;
     margin: 11px 0 0;
@@ -896,7 +924,7 @@ button {
 
 .empty-state p {
     color: var(--muted);
-    font-size: 11px;
+    font-size: 16px;
     margin: 0 0 20px;
 }
 
@@ -930,7 +958,7 @@ button {
 .field {
     display: flex;
     flex-direction: column;
-    gap: 7px;
+    gap: 9px;
 }
 
 .field.full {
@@ -938,7 +966,7 @@ button {
 }
 
 .field label {
-    font-size: 9px;
+    font-size: 14px;
     font-weight: 500;
     letter-spacing: .1em;
     text-transform: uppercase;
@@ -948,12 +976,18 @@ button {
     border: 1px solid #dedbd3;
     background: #fff;
     padding: 12px;
-    font-size: 11px;
+    font-size: 16px;
     outline: none;
 }
 
 .field input:focus, .field textarea:focus {
-    border-color: var(--orange);
+    border-color: var(--orange-text);
+    box-shadow: 0 0 0 1px var(--orange-text);
+}
+
+.search:focus-visible, .field input:focus-visible, .field textarea:focus-visible {
+    outline: 3px solid var(--ink);
+    outline-offset: 3px;
 }
 
 .field textarea {
@@ -977,7 +1011,7 @@ button {
     justify-content: space-between;
     gap: 8px;
     padding: 10px 0;
-    font-size: 10px;
+    font-size: 14px;
 }
 
 .checkout-item span:last-child {
@@ -1029,7 +1063,7 @@ button {
 }
 
 .success p {
-    font-size: 12px;
+    font-size: 16px;
     color: var(--muted);
     line-height: 1.7;
 }
@@ -1051,7 +1085,7 @@ button {
     align-items: center;
     justify-content: space-between;
     padding: 0 max(calc((100vw - var(--max))/2), 6.5vw);
-    font-size: 8px;
+    font-size: 12px;
     letter-spacing: .15em;
 }
 
@@ -1064,7 +1098,7 @@ button {
 
 .footer-brand span {
     color: var(--orange);
-    font-size: 9px;
+    font-size: 12px;
     vertical-align: top;
 }
 
@@ -1074,15 +1108,18 @@ button {
     position: fixed;
     right: 25px;
     bottom: 25px;
-    padding: 14px 19px;
+    max-width: min(520px, calc(100vw - 32px));
+    padding: 16px 20px;
     background: var(--ink);
     color: white;
-    font-size: 11px;
+    font-size: 16px;
     z-index: 20;
     opacity: 0;
     transform: translateY(10px);
     transition: .25s;
     pointer-events: none;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
 }
 
 .toast.show {
@@ -1098,13 +1135,14 @@ button {
 }
 
 .cart-count-title {
-    color: var(--orange);
+    color: var(--orange-text);
 }
 
 .no-results {
     padding: 55px;
     text-align: center;
     color: var(--muted);
+    font-size: 16px;
     grid-column: 1/-1;
 }
 
@@ -1136,8 +1174,9 @@ button {
 
 @media(max-width:650px) {
     .announcement {
-        font-size: 7px;
-        letter-spacing: .1em;
+        font-size: 11px;
+        letter-spacing: .06em;
+        gap: 6px;
     }
     .site-header {
         height: 68px;
@@ -1151,16 +1190,17 @@ button {
         font-size: 16px;
     }
     .main-nav {
-        gap: 15px;
+        gap: 10px;
     }
     .nav-link {
-        font-size: 10px;
+        font-size: 16px;
+        min-height: 44px;
     }
     .cart-nav {
-        height: 33px;
-        padding: 0 7px;
+        min-height: 44px;
+        padding: 0 8px;
         gap: 6px;
-        font-size: 10px;
+        font-size: 16px;
     }
     .hero {
         display: flex;
@@ -1196,7 +1236,9 @@ button {
         font-size: 34px;
     }
     .section-head {
-        align-items: center;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 12px;
     }
     .product-grid, .catalog-grid {
         grid-template-columns: 1fr 1fr;
@@ -1212,7 +1254,8 @@ button {
         font-size: 18px;
     }
     .product-desc {
-        font-size: 9px;
+        font-size: 14px;
+        min-height: 0;
     }
     .product-bottom {
         align-items: flex-start;
@@ -1221,11 +1264,14 @@ button {
     }
     .product-actions {
         width: 100%;
+        flex-direction: column;
+        gap: 8px;
     }
     .tiny-btn {
-        flex: 1;
-        padding: 0 5px;
-        font-size: 7px;
+        width: 100%;
+        min-height: 44px;
+        padding: 8px;
+        font-size: 16px;
     }
     .price {
         font-size: 19px;
@@ -1256,17 +1302,28 @@ button {
         gap: 22px;
     }
     .cart-row {
-        grid-template-columns: 70px 1fr auto;
-        gap: 10px;
+        grid-template-columns: 64px minmax(0, 1fr);
+        grid-template-rows: auto auto;
+        gap: 8px 12px;
+    }
+    .cart-row > div:nth-child(2) {
+        grid-column: 2;
+        grid-row: 1;
+        min-width: 0;
+    }
+    .cart-row .cart-line-price {
+        grid-column: 2;
+        grid-row: 2;
+        justify-self: end;
     }
     .cart-thumb {
         height: 70px;
     }
     .cart-product-title {
-        font-size: 16px;
+        font-size: 20px;
     }
     .cart-line-price {
-        font-size: 17px;
+        font-size: 20px;
     }
     .form-panel {
         padding: 19px;
@@ -1290,6 +1347,54 @@ button {
         flex-wrap: wrap;
     }
     .site-footer>span {
-        font-size: 7px;
+        font-size: 12px;
+    }
+
+    .toast {
+        right: 16px;
+        bottom: 16px;
+        left: 16px;
+        max-width: none;
+    }
+}
+
+@media(max-width:440px) {
+    .site-header {
+        height: auto;
+        min-height: 68px;
+        padding: 12px 18px;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .main-nav {
+        order: 3;
+        flex: 1 0 100%;
+        justify-content: center;
+        gap: 32px;
+    }
+
+    .nav-link {
+        height: 44px;
+        padding: 0 8px;
+    }
+}
+
+@media(max-width:380px) {
+    .product-grid, .catalog-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media(prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
     }
 }

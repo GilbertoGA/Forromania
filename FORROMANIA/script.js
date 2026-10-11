@@ -145,9 +145,18 @@ function countItems() {
 
 function updateCount() {
     const cartCount = document.getElementById('cart-count');
+    const cartButton = document.querySelector('.cart-nav');
+    const quantity = countItems();
 
     if (cartCount) {
-        cartCount.textContent = countItems();
+        cartCount.textContent = quantity;
+    }
+
+    if (cartButton) {
+        cartButton.setAttribute(
+            'aria-label',
+            `Carrito, ${quantity} ${quantity === 1 ? 'producto' : 'productos'}`
+        );
     }
 }
 
@@ -162,18 +171,42 @@ function addToCart(productId, quantity = 1) {
     cart[productId] = (cart[productId] || 0) + validQuantity;
 
     saveCart();
-    showToast(`${product.name} agregado al carrito`);
+    showToast(
+        `${product.name} agregado al carrito. Cantidad: ${cart[productId]}. ` +
+        `Subtotal y total: ${formatMoney(calculateTotal())}.`
+    );
 }
 
 function removeFromCart(productId) {
+    const product = products.find(item => item.id === productId);
+
     delete cart[productId];
 
     saveCart();
     render();
-    showToast('Producto eliminado del carrito');
+
+    const focusTarget = (
+        document.querySelector('.summary [data-view="checkout"]') ||
+        document.querySelector('.empty-state [data-view="catalog"]')
+    );
+
+    focusTarget?.focus({ preventScroll: true });
+
+    if (product) {
+        showToast(
+            `${product.name} eliminado. Subtotal y total: ` +
+            `${formatMoney(calculateTotal())}.`
+        );
+    }
 }
 
 function changeCartQuantity(productId, amount) {
+    const product = products.find(item => item.id === productId);
+
+    if (!product) {
+        return;
+    }
+
     const nextQuantity = Math.max(0, (cart[productId] || 0) + amount);
 
     if (nextQuantity === 0) {
@@ -184,6 +217,25 @@ function changeCartQuantity(productId, amount) {
 
     saveCart();
     render();
+
+    const quantityButton = document.querySelector(
+        `[data-cart-qty="${amount}"][data-id="${productId}"]`
+    );
+    const focusTarget = (
+        quantityButton ||
+        document.querySelector('.summary [data-view="checkout"]') ||
+        document.querySelector('.empty-state [data-view="catalog"]')
+    );
+
+    focusTarget?.focus({ preventScroll: true });
+
+    const quantityMessage = nextQuantity === 0
+        ? `${product.name} eliminado al reducir la cantidad a cero.`
+        : `Cantidad de ${product.name}: ${nextQuantity}.`;
+
+    showToast(
+        `${quantityMessage} Subtotal y total: ${formatMoney(calculateTotal())}.`
+    );
 }
 
 function calculateTotal() {
@@ -266,7 +318,7 @@ function homeView() {
             <section class="hero">
                 <div class="hero-copy">
                     <div class="eyebrow">Accesorios para cada ruta</div>
-                    <h1>El camino<br>es <em>tuyo.</em></h1>
+                    <h1 tabindex="-1">El camino<br>es <em>tuyo.</em></h1>
                     <p>
                         Encuentra ese equipo que te acompaña kilómetro a kilómetro.
                         Lo esencial para salir a rodar, hecho para tu manera de vivir la moto.
@@ -314,10 +366,15 @@ function catalogView() {
             <div class="catalog-title-row">
                 <div>
                     <div class="eyebrow">Todo lo que necesitas para salir</div>
-                    <h1>El catálogo</h1>
+                    <h1 tabindex="-1">El catálogo</h1>
                     <p>
                         Encuentra tu próximo compañero de ruta.
-                        <span>${products.length} productos</span>
+                        <span
+                            id="product-count"
+                            role="status"
+                            aria-live="polite"
+                            aria-atomic="true"
+                        >${products.length} productos</span>
                     </p>
                 </div>
                 <input
@@ -353,7 +410,7 @@ function detailView() {
                 </div>
                 <div class="detail-copy">
                     <div class="product-type">${product.type}</div>
-                    <h1>${product.name}</h1>
+                    <h1 tabindex="-1">${product.name}</h1>
                     <div class="detail-price">${formatMoney(product.price)}</div>
                     <p>${product.description}</p>
                     <ul class="feature-list">
@@ -363,9 +420,19 @@ function detailView() {
                     </ul>
                     <div class="buy-row">
                         <div class="quantity">
-                            <button data-qty="-1" aria-label="Disminuir cantidad">−</button>
-                            <span id="detail-qty">${detailQty}</span>
-                            <button data-qty="1" aria-label="Aumentar cantidad">+</button>
+                            <button
+                                type="button"
+                                data-qty="-1"
+                                aria-label="Disminuir cantidad de ${product.name}"
+                            >−</button>
+                            <span id="detail-qty" aria-live="polite" aria-atomic="true">
+                                ${detailQty}
+                            </span>
+                            <button
+                                type="button"
+                                data-qty="1"
+                                aria-label="Aumentar cantidad de ${product.name}"
+                            >+</button>
                         </div>
                         <button class="button" data-add-detail="${product.id}">
                             Agregar al carrito <span class="button-arrow">↗</span>
@@ -393,9 +460,19 @@ function cartItem(product) {
                 <div class="cart-product-title">${product.name}</div>
                 <div class="cart-controls">
                     <div class="quantity">
-                        <button data-cart-qty="-1" data-id="${product.id}">−</button>
+                        <button
+                            type="button"
+                            data-cart-qty="-1"
+                            data-id="${product.id}"
+                            aria-label="Disminuir cantidad de ${product.name}"
+                        >−</button>
                         <span>${cart[product.id]}</span>
-                        <button data-cart-qty="1" data-id="${product.id}">+</button>
+                        <button
+                            type="button"
+                            data-cart-qty="1"
+                            data-id="${product.id}"
+                            aria-label="Aumentar cantidad de ${product.name}"
+                        >+</button>
                     </div>
                     <button class="remove-btn" data-remove="${product.id}">
                         Eliminar
@@ -434,7 +511,7 @@ function cartView() {
     return `
         <div class="view page-wrap">
             <div class="eyebrow">Tu selección</div>
-            <h1 class="page-title">
+            <h1 class="page-title" tabindex="-1">
                 Tu carrito <span class="cart-count-title">(${countItems()})</span>
             </h1>
             ${cartProducts.length ? `
@@ -475,7 +552,7 @@ function checkoutView() {
     return `
         <div class="view page-wrap">
             <div class="eyebrow">Ya casi está</div>
-            <h1 class="page-title">Completa tu pedido</h1>
+            <h1 class="page-title" tabindex="-1">Completa tu pedido</h1>
             <div class="checkout-layout">
                 <form class="form-panel" id="order-form">
                     <h2>Datos para contactarte</h2>
@@ -551,7 +628,7 @@ function successView() {
             <section class="success">
                 <div class="success-mark">✓</div>
                 <div class="eyebrow">Pedido registrado</div>
-                <h1>¡Listo para rodar!</h1>
+                <h1 tabindex="-1">¡Listo para rodar!</h1>
                 <p>
                     Tu pedido quedó registrado correctamente. En este prototipo,
                     FORROMANIA se pondría en contacto contigo para coordinar los detalles.
@@ -589,9 +666,16 @@ function showView(viewName) {
     view = viewName;
     render();
 
+    const viewHeading = document.querySelector('#app h1');
+    viewHeading?.focus({ preventScroll: true });
+
+    const prefersReducedMotion = window.matchMedia(
+        '(prefers-reduced-motion: reduce)'
+    ).matches;
+
     window.scrollTo({
         top: 0,
-        behavior: 'smooth'
+        behavior: prefersReducedMotion ? 'auto' : 'smooth'
     });
 
     updateNavigation(viewName);
@@ -717,10 +801,14 @@ function bindSearchEvents() {
             return searchableText.toLocaleLowerCase('es').includes(searchQuery);
         });
         const catalogGrid = document.getElementById('catalog-grid');
+        const productCount = document.getElementById('product-count');
 
         catalogGrid.innerHTML = filteredProducts.length
             ? filteredProducts.map(productCard).join('')
             : '<div class="no-results">No encontramos productos para tu búsqueda.</div>';
+        productCount.textContent = filteredProducts.length === 1
+            ? '1 producto'
+            : `${filteredProducts.length} productos`;
 
         bindProductEvents();
     });
